@@ -40,7 +40,7 @@ def novo_pet(request):
             pet.tags.add(tag)
 
         pet.save()
-
+        # pets = Pet.objects.filter(usuario=request.user)
         tags = Tag.objects.all()
         racas = Raca.objects.all()
         messages.add_message(request, constants.SUCCESS, 'Novo pet cadastrado')
@@ -63,3 +63,9 @@ def remover_pet(request, id):
     pet.delete()
     messages.add_message(request, constants.SUCCESS, 'Removido com sucesso.')
     return redirect('/divulgar/seus_pets')
+
+
+def ver_pet(request, id):
+    if request.method == "GET":
+        pet = Pet.objects.get(id = id)
+        return render(request, 'ver_pet.html', {'pet': pet})
