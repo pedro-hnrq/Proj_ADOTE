@@ -31,7 +31,7 @@ def cadastro(request):
                 password=senha,
             )
             messages.add_message(request, constants.SUCCESS, 'Usuário cadastrado com Sucesso')
-            return render(request, 'cadastro.html')
+            return render(request, 'login.html')
         except:
             messages.add_message(request, constants.ERROR, 'Erro interno no sistema')
             return render(request, 'cadastro.html')
@@ -50,7 +50,7 @@ def logar(request):
         
         if user is not None:
             login(request, user)
-            return redirect('/divulgar/novo_pet')
+            return redirect('/adotar')
         else:
             messages.add_message(request, constants.ERROR, 'Usuário ou Senha incorretos')
             return render(request, 'login.html')
